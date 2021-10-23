@@ -67,14 +67,14 @@
         // Get select time
         var time_selectors = document.getElementsByClassName("sunic_selector");
         for (var i=0; i<time_selectors.length; i++){
-            var select_time = GM_getValue("sunic_selector"+i+"_value");
+            var select_time = localStorage.getItem("sunic_selector"+i+"_value");
             select_seat(select_time);
         }
 
         // var array = document.getElementsByClassName('unselected-seat');
         // array[array.length - 2].click();
         // array[array.length - 1].click();
-        
+
         var array_zhifu = document.getElementsByClassName("butMoney");
         array_zhifu[0].getElementsByTagName("button")[0].click();
         document.getElementsByClassName("el-checkbox__inner")[0].click();
@@ -101,7 +101,7 @@
         for (var i=0; i<time_selectors.length; i++){
             var select_index = time_selectors[i].selectedIndex;
             var select_time = time_selectors[i].options[select_index].value;
-            GM_setValue("sunic_selector"+i+"_value", select_time);
+            localStorage.setItem("sunic_selector"+i+"_value", select_time);
         }
 
         // Save booking date

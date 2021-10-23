@@ -92,6 +92,7 @@
 
     function refreshing(){
         // alert("开启");
+        // Save booking date id
         var date_id = 'tab-' + document.getElementById("sunic_date").value;
         localStorage.setItem("sunic_date_id", date_id);
 
@@ -103,9 +104,15 @@
             GM_setValue("sunic_selector"+i+"_value", select_time);
         }
 
+        // Save booking date
         GM_setValue("sunic_booking_date", document.getElementById("sunic_date").value);
+        // Save start time
         GM_setValue("sunic_start_time", document.getElementById("sunic_time").value);
+
+        // Refresh flag
         GM_setValue("timeout_refresh", 1);
+
+        // Refresh
         location.reload();
 
         // var current=location.href;

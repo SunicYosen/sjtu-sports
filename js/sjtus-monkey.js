@@ -176,7 +176,7 @@
             array_zhifu[0].getElementsByTagName("button")[0].click();
             document.getElementsByClassName("el-checkbox__inner")[0].click();
             document.getElementsByClassName("el-dialog__footer")[0].getElementsByTagName("button")[1].click();
-            setTimeout('alert("已完成，请付款！")', 1000);
+            setTimeout('alert("已完成，请付款！")', 3000);
         }
         else{
             setTimeout('alert("抢购失败，没有合适的场地！")', 1000);
@@ -195,7 +195,7 @@
         var date_id = GM_getValue("sunic_date_id");
         if (has_date_id(date_id)){
             document.getElementById(date_id).click();
-            setTimeout(select_seats, 200);
+            setTimeout(select_seats, 300);
         }
     }
 
@@ -322,7 +322,7 @@
         if(is_booking_page()){
             var target_time  = new Date(document.getElementById("sunic_time").value);
             var current_time = new Date();
-            var time_out_ms = target_time.getTime() - current_time.getTime() + 80;
+            var time_out_ms = target_time.getTime() - current_time.getTime() + 500;
             // document.getElementById("sunic_time").value="等待: " + time_out_ms + " ms";
             save_options();
             setTimeout(refreshing, time_out_ms);

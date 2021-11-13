@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         SJTU Sports
 // @namespace    Sunic.SJTU
-// @version      0.2
-// @description  More Sports!
+// @version      0.3
+// @description  Download Excel of sci!
 // @author       Sunic Yosen
 // @match        https://www.google.com/search?q=Tampermonkey&oq=Tampermonkey&aqs=chrome..69i57j69i60l4.685j0j7&sourceid=chrome&ie=UTF-8
 // @icon         https://www.google.com/s2/favicons?domain=sunicyosen.github.io
@@ -179,7 +179,7 @@
             setTimeout('alert("已完成，请付款！")', 3000);
         }
         else{
-            setTimeout('alert("抢购失败，没有合适的场地！")', 1000);
+            setTimeout('alert("抢购失败，没有合适的场地！")', 200);
         }
         delete_options();
         // alert("已完成，请付款！");
@@ -238,10 +238,10 @@
             GM_setValue("timeout_refresh", false);
 
             // select_date()
-            setTimeout(select_date, 20);
+            setTimeout(select_date, 200);
         }
         else{
-            if (GM_getValue("refresh_iters") < 5){
+            if (GM_getValue("refresh_iters") < 10){
                 setTimeout(refreshing, 300);
             }
             else{
@@ -251,7 +251,7 @@
         }
     }
 
-    var sunic_ext_elements = '<div id="sunic_ext" style="z-index: 9999; position: fixed ! important; right: 0px; top: 1%; width:50%;"> <div id="date_text" style="float: left; margin-left:5px;">预定日期: </div> <div style="float: left;"> <input id="sunic_date" style="border:1px solid #131313; margin-left:5px; margin-right:5px; style="width: 100%;"/></div> <div id="time_text" style="float: left; margin-left:5px;">开始时间: </div> <div style="float: left;"> <input id="sunic_time" style="border:1px solid #131313; margin-left:5px; margin-right:5px;" value="12:00"  style="width: 100%;"/></div> <div style="text-align:center; float: left;"> <select class="sunic_selector" id="sunic_1_selector"> <option value=0>None</option> <option value=7>7</option> 	<option value=8>8</option> 	<option value=9>9</option> 	<option value=10>10</option> 	<option value=11>11</option> 	<option value=12>12</option> 	<option value=13>13</option> 	<option value=14>14</option> 	<option value=15>15</option> 	<option value=16>16</option> 	<option value=17>17</option> 	<option value=18>18</option> 	<option value=19 selected="selected">19</option> 	<option value=20 >20</option> 	<option value=21>21</option> </select> <select class="sunic_selector" id="sunic_2_selector"> <option value=0>None</option> <option value=7>7</option> 	<option value=8>8</option> 	<option value=9>9</option> 	<option value=10>10</option> 	<option value=11>11</option> 	<option value=12>12</option> 	<option value=13>13</option> 	<option value=14>14</option> 	<option value=15>15</option> 	<option value=16>16</option> 	<option value=17>17</option> 	<option value=18>18</option> 	<option value=19>19</option> 	<option value=20 selected="selected">20</option> 	<option value=21>21</option> </select> </div> <div style="float: left; margin-left:5px;"><input id="sunic_enable" type="checkbox" style="margin-left:5px;"/></div> <div style="text-align:center; float: left;"> 开启 </div></div>';
+    var sunic_ext_elements = '<div id="sunic_ext" style="z-index: 9999; position: fixed ! important; right: 0px; top: 1%; width:50%;"> <div id="date_text" style="float: left; margin-left:5px;">预定日期: </div> <div style="float: left;"> <input id="sunic_date" style="border:1px solid #131313; margin-left:5px; margin-right:5px; style="width: 100%;"/></div> <div id="time_text" style="float: left; margin-left:5px;">开始时间: </div> <div style="float: left;"> <input id="sunic_time" style="border:1px solid #131313; margin-left:5px; margin-right:5px;" value="12:00"  style="width: 100%;"/></div> <div style="text-align:center; float: left;"> <select class="sunic_selector" id="sunic_1_selector"> <option value=0>None</option> <option value=7>7</option> 	<option value=8>8</option> 	<option value=9>9</option> 	<option value=10>10</option> 	<option value=11>11</option> 	<option value=12>12</option> 	<option value=13>13</option> 	<option value=14>14</option> 	<option value=15>15</option> 	<option value=16>16</option> 	<option value=17>17</option> 	<option value=18>18</option> 	<option value=19 selected="selected">19</option> 	<option value=20 >20</option> 	<option value=21>21</option> </select> <select class="sunic_selector" id="sunic_2_selector"> <option value=0>None</option> <option value=7>7</option> 	<option value=8>8</option> 	<option value=9>9</option> 	<option value=10>10</option> 	<option value=11>11</option> 	<option value=12>12</option> 	<option value=13>13</option> 	<option value=14>14</option> 	<option value=15>15</option> 	<option value=16>16</option> 	<option value=17>17</option> 	<option value=18>18</option> 	<option value=19>19</option> 	<option value=20 selected="selected">20</option> 	<option value=21>21</option> </select> </div> <div style="float: left; margin-left:5px;"><input id="sunic_enable" type="checkbox" style="margin-left:5px;"/></div> <div style="text-align:center; float: left;"> 定时 </div> <div style="float: left; margin-left:5px;"><input id="sunic_artificial_enable" type="checkbox" style="margin-left:5px;"/></div> <div style="text-align:center; float: left;"> 手动刷 </div></div>';
 
     if(window.location.origin == "https://sports.sjtu.edu.cn"){
         if(is_login()){
@@ -322,7 +322,7 @@
         if(is_booking_page()){
             var target_time  = new Date(document.getElementById("sunic_time").value);
             var current_time = new Date();
-            var time_out_ms = target_time.getTime() - current_time.getTime() + 500;
+            var time_out_ms = target_time.getTime() - current_time.getTime() + 400;
             // document.getElementById("sunic_time").value="等待: " + time_out_ms + " ms";
             save_options();
             setTimeout(refreshing, time_out_ms);
@@ -330,6 +330,16 @@
         } else{
             alert("请在预定页面开启");
             document.getElementById("sunic_enable").checked = false;
+        }
+    }
+
+    document.getElementById("sunic_artificial_enable").onclick = function(){
+        if(is_booking_page()){
+            save_options();
+            setTimeout(after_refresh_fun, 300);
+        } else{
+            alert("请在预定页面预定刷性");
+            document.getElementById("sunic_artificial_enable").checked = false;
         }
     }
 
